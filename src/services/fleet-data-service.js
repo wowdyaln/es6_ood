@@ -29,7 +29,7 @@ export class FleetDataService {
           this.errors.push(e)
         }
       } else {
-        let e = new DataError("Invalid vehicle type", data)
+        let e = new DataError(`Invalid vehicle type: '${data.type}' `, data)
         this.errors.push(e)
       }
     })
@@ -37,7 +37,21 @@ export class FleetDataService {
 
   // validate carData and droneData
   validateCarData(car){
-    return true
+    let requiredProps = "license model latLong miles make".split(" ")
+    let hasErrors = false
+    let regex = /^\d*\.?\d*$/
+    requiredProps.forEach( (p)=> {
+      if (!car[p]){
+        this.errors.push(new DataError(`wrong property: ${p} in a car`, car))
+        hasErrors = true
+      }
+    })
+    if (!regex.test(car.miles)){
+      this.errors.push(new DataError(`invalid miles: '${car.miles}' in a car`, car))
+      hasErrors = true
+    }
+
+    return !hasErrors
   }
 
 
