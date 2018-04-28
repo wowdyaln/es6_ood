@@ -21,9 +21,9 @@ export class FleetDataService {
         }
       } else if (data.type === "car"){
         if (this.validateCarData(data)){
-
           let car = this.loadCar(data)
-          this.cars.push(data)
+          if (car)
+            this.cars.push(data)
         } else {
           let e = new DataError("invalid car data", data)
           this.errors.push(e)
@@ -40,12 +40,16 @@ export class FleetDataService {
     let requiredProps = "license model latLong miles make".split(" ")
     let hasErrors = false
     let regex = /^\d*\.?\d*$/
+
+    // check car's property
     requiredProps.forEach( (p)=> {
       if (!car[p]){
-        this.errors.push(new DataError(`wrong property: ${p} in a car`, car))
+        this.errors.push(new DataError(`wrong property: [${p}] in a car`, car))
         hasErrors = true
       }
     })
+
+    // validate miles
     if (!regex.test(car.miles)){
       this.errors.push(new DataError(`invalid miles: '${car.miles}' in a car`, car))
       hasErrors = true
