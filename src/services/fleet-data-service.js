@@ -12,21 +12,15 @@ export class FleetDataService {
     datas.forEach((data)=>{
       if (data.type==="drone"){
         if (this.validateDroneData(data)){
-          
           let drone = this.loadDrone(data)
-          this.drones.push(drone)
-        } else {
-          let e = new DataError("invalid drone data", data)
-          this.errors.push(e)
+          if (drone)
+            this.drones.push(drone)
         }
       } else if (data.type === "car"){
         if (this.validateCarData(data)){
           let car = this.loadCar(data)
           if (car)
             this.cars.push(data)
-        } else {
-          let e = new DataError("invalid car data", data)
-          this.errors.push(e)
         }
       } else {
         let e = new DataError(`Invalid vehicle type: '${data.type}' `, data)
@@ -35,7 +29,6 @@ export class FleetDataService {
     })
   }
 
-  // validate carData and droneData
   validateCarData(car){
     let requiredProps = "license model latLong miles make".split(" ")
     let hasErrors = false
@@ -72,7 +65,25 @@ export class FleetDataService {
   }
 
   validateDroneData(drone){
-    return true
+    let requiredProps = "license model latLong base airTimeHours".split(" ")
+    let hasErrors = false
+    let regex = /^\d*\.?\d*$/
+
+    // check drone's property
+    requiredProps.forEach((p) => {
+      if (!drone[p]) {
+        this.errors.push(new DataError(`wrong property: [${p}] in a drone`, drone))
+        hasErrors = true
+      }
+    })
+
+    // validate airTimeHours
+    if (!regex.test(drone.airTimeHours)) {
+      this.errors.push(new DataError(`invalid airTimeHours: '${drone.airTimeHours}' in a drone`, drone))
+      hasErrors = true
+    }
+
+    return !hasErrors
   }
 
 
