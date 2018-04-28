@@ -11,17 +11,35 @@ export class FleetDataService {
   loadData(datas){
     datas.forEach((data)=>{
       if (data.type==="drone"){
-        let drone = this.loadDrone(data)
-        this.drones.push(drone)
+        if (this.validateDroneData(data)){
+          
+          let drone = this.loadDrone(data)
+          this.drones.push(drone)
+        } else {
+          let e = new DataError("invalid drone data", data)
+          this.errors.push(e)
+        }
       } else if (data.type === "car"){
-        let car = this.loadCar(data)
-        this.cars.push(data)
+        if (this.validateCarData(data)){
+
+          let car = this.loadCar(data)
+          this.cars.push(data)
+        } else {
+          let e = new DataError("invalid car data", data)
+          this.errors.push(e)
+        }
       } else {
         let e = new DataError("Invalid vehicle type", data)
         this.errors.push(e)
       }
     })
   }
+
+  // validate carData and droneData
+  validateCarData(car){
+    return true
+  }
+
 
   loadCar(car){
     try {
@@ -34,6 +52,12 @@ export class FleetDataService {
     }
     return null
   }
+
+  validateDroneData(drone){
+    return true
+  }
+
+
   loadDrone(drone){
     try {
         let d = new Drone(drone.license, drone.model, drone.latLong)
@@ -45,6 +69,8 @@ export class FleetDataService {
     }
     return null
   }
+
+
 }
 
 

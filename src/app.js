@@ -6,4 +6,4 @@ import {FleetDataService} from './services/fleet-data-service.js'
 let dataService = new FleetDataService()
 dataService.loadData(fleet)
 
-console.log(dataService.errors)
+console.log(dataService)
