@@ -132,6 +132,13 @@ export class FleetDataService {
     })
   }
 
+  // search by make
+  filterCarsByMake(keyword){
+    let k = keyword.toLowerCase()
+    return this.cars.filter( car => car.make
+                                        .toLowerCase()
+                                        .indexOf(k) != -1 )
+  }
 }
 
 
