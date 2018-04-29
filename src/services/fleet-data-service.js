@@ -99,6 +99,38 @@ export class FleetDataService {
     return null
   }
 
+// search by license 
+  getCarByLicense(license){
+    return this.cars.filter((car)=> {
+      return car.license == license
+    })
+  }
+
+  getCarsSortedByLicense(){
+    return this.cars.sort( (car1, car2)=>{
+      if (car1.license < car2.license)
+        return -1
+      if (car1.license > car2.license)
+        return 1
+      return 0
+    })
+  }
+
+  getDroneByLicense(license) {
+    return this.drones.filter((drone) => {
+      return drone.license == license
+    })
+  }
+
+  getDronesSortedByLicense() {
+    return this.drones.sort((drone1, drone2) => {
+      if (drone1.license < drone2.license)
+        return -1
+      if (drone1.license > drone2.license)
+        return 1
+      return 0
+    })
+  }
 
 }
 
