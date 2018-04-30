@@ -2,6 +2,7 @@ import $ from 'jquery';
 import {fleet} from './fleet-data.js'
 import {FleetDataService} from './services/fleet-data-service.js'
 import {HomePage} from './home-page.js'
+import {CarsPage} from './cars-page.js'
 import {ApplicationBase} from './framework/application-base.js'
 
 export class App extends ApplicationBase {
@@ -12,7 +13,7 @@ export class App extends ApplicationBase {
     this.dataService.loadData(fleet)
 
     this.addRoute('Home', new HomePage(), true)
-    this.addRoute('Cars', null)
+    this.addRoute('Cars', new CarsPage())
     this.addRoute('Drones', null)
     this.addRoute('Map', null)
   }

@@ -1,12 +1,12 @@
-import {BaseElement} from './ui/base-element.js'
+import {Page} from './framework/page.js'
 import {Image} from './ui/image.js'
 import {Button} from './ui/button.js'
-import {applicaiton} from './app.js'
+import {application} from './app.js'
 
-export class HomePage extends BaseElement {
+export class HomePage extends Page {
 
   constructor(){
-    super()
+    super('Home')
   }
 
   createElement(){
@@ -19,12 +19,12 @@ export class HomePage extends BaseElement {
     let b = new Button('self driving cars')
     b.setStyleString(styleString)
     b.appendToElement(this.element)
-    // b.element.click(){()=> applicaiton.activateRoute('Cars')}
+    b.element.click(()=> application.activateRoute('Cars'))
 
     b = new Button('Drones')
     b.setStyleString(styleString)
     b.appendToElement(this.element)
-    // b.element.click(){ () => applicaiton.activateRoute('Drones') }
+    // b.element.click(() => application.activateRoute('Drones'))
 
 
   }
