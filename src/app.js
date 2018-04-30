@@ -17,12 +17,12 @@ import {DataTable} from './ui/data-table.js'
 // let i = new Image('../image/drone.jpg')
 // i.appendToElement($('body'))
 
-let tb = new TitleBar('our application')
-tb.addLink('Home','')
-tb.addLink('Cars','')
-tb.addLink('Drones','')
-tb.addLink('Map','')
-tb.appendToElement($('body'))
+// let tb = new TitleBar('our application')
+// tb.addLink('Home','')
+// tb.addLink('Cars','')
+// tb.addLink('Drones','')
+// tb.addLink('Map','')
+// tb.appendToElement($('body'))
 
 let headers = "License Make Model Miles".split(" ")
 let dataService = new FleetDataService()

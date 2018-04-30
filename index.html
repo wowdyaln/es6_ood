@@ -8,31 +8,34 @@
     <script src="node_modules/traceur/bin/traceur.js"></script>
     <script src="node_modules/systemjs/dist/system.js"></script>
     <script src="node_modules/material-design-lite/dist/material.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTb2UkVlgyksKbPprXuhR00XGeyxEqLnA&callback=googleMapsCallback" async defer></script>
   </head>
   <body>
       <script>
-        System.config({
-            map: {
-              'jquery': './node_modules/jquery/dist/jquery.js',
-              'plugin-traceur': './node_modules/systemjs-plugin-traceur/plugin-traceur.js',
-              'traceur': './node_modules/traceur/bin/traceur.js',
-              'traceur-runtime': './node_modules/traceur/bin/traceur-runtime.js'
-            },
-            meta: {
-              'traceur': {
-                format: 'global',
-                exports: 'traceur',
-                scriptLoad: false
+        function googleMapsCallback(){
+          System.config({
+              map: {
+                'jquery': './node_modules/jquery/dist/jquery.js',
+                'plugin-traceur': './node_modules/systemjs-plugin-traceur/plugin-traceur.js',
+                'traceur': './node_modules/traceur/bin/traceur.js',
+                'traceur-runtime': './node_modules/traceur/bin/traceur-runtime.js'
               },
-              'traceur-runtime': {
-                format: 'global',
-                exports: '$traceurRuntime'
-              }
-            },
-            transpiler: 'plugin-traceur',
-            transpilerRuntime: false
-          });
-        System.import('src/app.js');
+              meta: {
+                'traceur': {
+                  format: 'global',
+                  exports: 'traceur',
+                  scriptLoad: false
+                },
+                'traceur-runtime': {
+                  format: 'global',
+                  exports: '$traceurRuntime'
+                }
+              },
+              transpiler: 'plugin-traceur',
+              transpilerRuntime: false
+            });
+          System.import('src/app.js');
+        }
       </script> 
   </body>
 </html>
