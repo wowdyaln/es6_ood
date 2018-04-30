@@ -5,16 +5,20 @@ import {fleet} from './fleet-data.js'
 import {FleetDataService} from './services/fleet-data-service.js'
 import {Button} from './ui/button.js'
 import {Image} from './ui/image.js'
+import {TitleBar} from './ui/title-bar.js'
 
 
 // let dataService = new FleetDataService()
 // dataService.loadData(fleet)
-let b = new Button('click me')
-b.appendToElement($('body'))
+// let b = new Button('click me')
+// b.appendToElement($('body'))
 
-// let i = new Image('./image/drone.jpg')
-let i = new Image('../image/drone.jpg')
-i.appendToElement($('body'))
+// let i = new Image('../image/drone.jpg')
+// i.appendToElement($('body'))
 
-console.log(i)
-console.log(b)
+let tb = new TitleBar('our application')
+tb.addLink('Home','')
+tb.addLink('Cars','')
+tb.addLink('Drones','')
+tb.addLink('Map','')
+tb.appendToElement($('body'))
