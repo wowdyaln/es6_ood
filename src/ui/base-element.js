@@ -8,16 +8,21 @@ export class BaseElement {
   appendToElement(el){
     this.createElement()
     el.append(this.element)
+    this.enableJS()
   }
 
   createElement(){
-    let s = getElementString()
-    this.element = $(s)
+    let s = this.getElementString()
+    this.element = $(s)  //http://api.jquery.com/jQuery/#jQuery-html-attributes
   }
 
 
   getElementString(){
     throw 'plz override getElementString() in BaseElement'
+  }
+
+  enableJS(){
+    componentHandler.upgradeElement(this.element[0]) //https://getmdl.io/started/index.html#dynamic
   }
 
 }
