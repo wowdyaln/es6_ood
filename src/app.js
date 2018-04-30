@@ -7,6 +7,7 @@ import {Button} from './ui/button.js'
 import {Image} from './ui/image.js'
 import {TitleBar} from './ui/title-bar.js'
 import {DataTable} from './ui/data-table.js'
+import { GoogleMap } from './ui/google-map.js';
 
 
 // let dataService = new FleetDataService()
@@ -24,9 +25,13 @@ import {DataTable} from './ui/data-table.js'
 // tb.addLink('Map','')
 // tb.appendToElement($('body'))
 
-let headers = "License Make Model Miles".split(" ")
+// let headers = "License Make Model Miles".split(" ")
 let dataService = new FleetDataService()
 dataService.loadData(fleet)
-let dt = new DataTable(headers, dataService.cars)
+// let dt = new DataTable(headers, dataService.cars)
+// dt.appendToElement($('body'))
 
-dt.appendToElement($('body'))
+let centerOfMap = {lat: 40.78, lng: -73.96}
+
+let map = new GoogleMap(centerOfMap, dataService.cars)
+map.appendToElement($('body'))
